@@ -1,10 +1,7 @@
 package com.example.hackaton
 
-import android.provider.ContactsContract
-import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.*
-import org.json.JSONObject
 
 interface RetrofitService {
 
@@ -57,5 +54,9 @@ interface RetrofitService {
     fun login(
         @Body params: HashMap<String, String>
     ): Call<Test>
-
+    //순위 리스트
+//    @GET
+//    fun load(
+//        @Body nickname: String
+//    ):Call<RankList>
 }

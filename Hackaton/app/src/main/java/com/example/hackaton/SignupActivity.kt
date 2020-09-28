@@ -23,8 +23,9 @@ class SignupActivity : AppCompatActivity() {
     lateinit var registerBtn: Button
     lateinit var check: Button
 
-
+    var check_dupBtn = 0
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
@@ -32,11 +33,15 @@ class SignupActivity : AppCompatActivity() {
 
         check.setOnClickListener {
             // 닉네임 중복 확인
-            nicknameCheck(this)
+            nicknameCheck(this@SignupActivity)
         }
 
         registerBtn.setOnClickListener {
-            register(this)
+            if(check_dupBtn==0){
+                Toast.makeText(this@SignupActivity,"아이디 중복확인을 해주세요.",Toast.LENGTH_SHORT).show()
+            } else {
+                register(this)
+            }
         }
     }
 
@@ -87,7 +92,6 @@ class SignupActivity : AppCompatActivity() {
                                 }else{
                                     Toast.makeText(activity, "회원가입에 실패했습니다3", Toast.LENGTH_LONG).show()
                                 }
-                                Toast.makeText(activity, "회원가입에 실패했습니다2", Toast.LENGTH_LONG).show()
 
                         }
                     })
@@ -107,7 +111,7 @@ class SignupActivity : AppCompatActivity() {
             Log.d("dup",nickname)
             val body = HashMap<String, String>()
             body.put("nickname", nickname)
-           // body.put("password", "")
+            //body.put("password", "")
 
             (application as MasterApplication).service.getNicknameIsExist(body)
                 .enqueue(object : Callback<NickName> {
@@ -119,20 +123,23 @@ class SignupActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<NickName>, response: Response<NickName>) {
                         //Log.d("internet","onResponse1")
                         //Log.d("internet",response.isSuccessful.toString())
-                        Log.d("internet", response.toString())
+                        Log.d("internet", response.code().toString())
                         if (response.isSuccessful) {
                             //Log.d("internet","onResponse2")
                             val result = response.body()
 
                             val success = result?.success
                             //Log.d("dup",id)
-                            Log.d("dup",response.toString())
+                            Log.d("dup",success)
                             // 닉네임 중복
                             if (success=="false") {
                                 Toast.makeText(activity, "사용 불가능한 닉네임입니다", Toast.LENGTH_LONG).show()
                             } else {
                                 Toast.makeText(activity, "사용 가능한 닉네임입니다", Toast.LENGTH_LONG).show()
+                                check_dupBtn++
                             }
+                        }else{
+                            Log.d("dup","err")
                         }
                     }
                 })

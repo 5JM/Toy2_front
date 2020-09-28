@@ -59,10 +59,10 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val user = response.body()
 
-                            Log.d("test11",user?.nickname)
+                            //Log.d("test11",user?.nickname)
                             val token = response.headers().get("X-AUTH-TOKEN").toString()
 
-                            Log.d("user", user.toString())
+                            //Log.d("user", user.toString())
 
                             if(token=="null"){
                                 Toast.makeText(this@LoginActivity, "아이디, 비밀번호가 틀립니다.", Toast.LENGTH_LONG).show()

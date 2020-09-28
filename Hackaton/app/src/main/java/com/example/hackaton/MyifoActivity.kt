@@ -1,17 +1,19 @@
 package com.example.hackaton
 
-import android.content.AbstractThreadedSyncAdapter
+
 import android.content.Context
-import android.os.AsyncTask
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.util.Log
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+
 import androidx.recyclerview.widget.RecyclerView
-import org.json.JSONArray
-import java.net.CacheResponse
+import kotlinx.android.synthetic.main.activity_myifo.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class MyifoActivity : AppCompatActivity() {
 
@@ -28,36 +30,88 @@ class MyifoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_myifo)
 
-
+//        nickname_myifo.text="test9"
+//        loadList()
     }
-
-    inner class Mypage_Control {
-        fun show_Rank(context: Context) {
-            viewManager = LinearLayoutManager(context)
-
-        }
-    }
-
-//    inner class asynctask : AsyncTask<String, Void, String>() {
-//        var state = -1
-//        override fun onPreExecute() {
-//            super.onPreExecute()
+//   fun loadList(){
+//       var id = "test9"
+//       val recycler_view = recyclerView
+//
+//       (application as MasterApplication).service.load(
+//           id
+//       ).enqueue(object : Callback<RankList>{
+//           override fun onFailure(call: Call<RankList>, t: Throwable) {
+//               Log.d("aaa","onFail")
+//               //Toast.makeText(this@MyifoActivity,"load_fail1",Toast.LENGTH_SHORT).show()
+//           }
+//
+//           override fun onResponse(call: Call<RankList>, response: Response<RankList>) {
+//               if(response.isSuccessful) {
+//                   val list = response.body()
+//                   Log.d("aaa","suc")
+////                   Log.d("aaa",list?.rankList?.get(0).toString())
+//               }else{
+//                   Log.d("aaa","else")
+//                   //Toast.makeText(this@MyifoActivity,"load_fail2",Toast.LENGTH_SHORT).show()
+//               }
+//
+//           }
+//       })
+//   }
+//        val nickname = id.text.toString()
+//        val password = pw.text.toString()
+//
+//        if(nickname==""){
+//            Toast.makeText(this@LoginActivity, "아이디를 입력해주세요", Toast.LENGTH_LONG).show()
+//        }else if(password==""){
+//            Toast.makeText(this@LoginActivity, "비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
+//        }else{
+//            val body = HashMap<String, String>()
+//            body.put("nickname", nickname)
+//            body.put("password", password)
+//
+//
+//            (application as MasterApplication).service.login(
+//                body
+//            ).enqueue(object : Callback<Test> {
+//                override fun onFailure(call: Call<Test>, t: Throwable) {
+//                    Toast.makeText(this@LoginActivity, "로그인에 실패했습니다", Toast.LENGTH_LONG).show()
+//                }
+//
+//                override fun onResponse(call: Call<Test>, response: Response<Test>) {
+//                    if (response.isSuccessful) {
+//                        val user = response.body()
+//
+//                        Log.d("test11",user?.nickname)
+//                        val token = response.headers().get("X-AUTH-TOKEN").toString()
+//
+//                        Log.d("user", user.toString())
+//
+//                        if(token=="null"){
+//                            Toast.makeText(this@LoginActivity, "아이디, 비밀번호가 틀립니다.", Toast.LENGTH_LONG).show()
+//                        }
+//                        else{
+//                            saveUserToken(token, this@LoginActivity)
+//                            (application as MasterApplication).createRetrofit()
+//                            //username을 반환하는지 test
+//                            Toast.makeText(this@LoginActivity, "환영합니다!" + "${user?.nickname}", Toast.LENGTH_LONG).show()
+//                            startActivity (
+//                                // Intent(this@SignInActivity, SearchActivity::class.java)
+//                                Intent(this@LoginActivity, MyifoActivity::class.java)
+//                            )
+//                        }
+//
+//                    }
+//                }
+//            })
 //        }
 //
-////        override fun doInBackground(vararg params: String): String {
-////            state = Integer.parseInt(params[0])
-////            val url = params[1]
-////            var response:String = ""
-////            when(state){
-////                0->{
-////
-////                }
-////            }
-////        }
-////
-////
-////    }
+//
 //    }
+
+
+
+
 
 }
 
